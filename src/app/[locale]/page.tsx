@@ -7,6 +7,7 @@ import { Gallery } from "@/components/sections/gallery"
 import { Amenities } from "@/components/sections/amenities"
 import { Location } from "@/components/sections/location"
 import { Booking } from "@/components/sections/booking"
+import { HouseRules } from "@/components/sections/house-rules"
 import { Reviews } from "@/components/sections/reviews"
 import { Faq } from "@/components/sections/faq"
 
@@ -22,6 +23,7 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
       <Amenities />
       <Location />
       <Booking />
+      <HouseRules />
       <Reviews />
       <Faq />
     </>

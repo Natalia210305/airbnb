@@ -4,7 +4,7 @@ import { notFound } from "next/navigation"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { routing } from "@/i18n/routing"
-import { fullAddress, property, tr } from "@/content/property"
+import { fullAddress, property, siteCredit, tr } from "@/content/property"
 import { propertyLocation } from "@/content/distances"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
@@ -48,6 +48,8 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(siteUrl),
+    authors: [{ name: siteCredit.name.en }],
+    creator: siteCredit.name.en,
     title,
     description,
     keywords: t("keywords"),

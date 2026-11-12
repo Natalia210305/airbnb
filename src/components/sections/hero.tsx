@@ -13,7 +13,14 @@ import {
 } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import type { Locale } from "@/i18n/routing"
-import { formatPrice, pricing, property, tr } from "@/content/property"
+import {
+  formatPrice,
+  formatRating,
+  pricing,
+  property,
+  ratings,
+  tr,
+} from "@/content/property"
 import { hospital } from "@/content/distances"
 import { contactLinks } from "@/lib/contact"
 import { buttonVariants } from "@/components/ui/button"
@@ -23,7 +30,7 @@ import { ApartmentTour } from "@/components/tour/apartment-tour"
 export function Hero() {
   const t = useTranslations("Hero")
   const locale = useLocale() as Locale
-  const { capacity, rating } = property
+  const { capacity } = property
 
   // Χωρητικότητα (όσα είναι γνωστά) + τα βασικά πλεονεκτήματα, έως 4 κάρτες
   const capacityFacts: { icon: LucideIcon; label: string }[] = [
@@ -72,10 +79,15 @@ export function Hero() {
           <div className="flex flex-wrap gap-2">
             <p className="flex items-center gap-1.5 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm">
               <StarIcon className="size-3.5 fill-primary text-primary" />
-              {t("rating", {
-                score: rating.score.toFixed(1),
-                source: rating.source,
-              })}
+              {ratings
+                .map((r) =>
+                  t("rating", {
+                    score: formatRating(r.score, locale),
+                    outOf: r.outOf,
+                    source: r.source,
+                  }),
+                )
+                .join(" · ")}
             </p>
             <ScrollLink
               href="/#hospital"

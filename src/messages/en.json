@@ -19,7 +19,7 @@
     "language": "Language"
   },
   "Hero": {
-    "rating": "{score}/5 on {source}",
+    "rating": "{score}/{outOf} on {source}",
     "hospitalBadge": "{walk} min walk from G. Hatzikosta Hospital",
     "cta": "Availability & prices",
     "call": "Call {phone}",
@@ -29,7 +29,7 @@
     "beds": "{count, plural, one {# bed} other {# beds}}",
     "baths": "{count, plural, one {# bath} other {# baths}}",
     "hospitalFact": "{walk} min walk to the hospital",
-    "parkingFact": "Parking available",
+    "parkingFact": "Free parking",
     "quietFact": "Quiet neighbourhood",
     "contactFact": "Direct contact with the host"
   },
@@ -41,7 +41,7 @@
     "walk": "on foot",
     "minutes": "{min} min",
     "km": "{km} km",
-    "parking": "The property has parking",
+    "parking": "Free parking at the property",
     "quiet": "Quiet surroundings to rest, day and night",
     "route": "See the route on the map",
     "directions": "Directions to the hospital",
@@ -80,7 +80,9 @@
   },
   "Gallery": {
     "title": "The space",
-    "subtitle": "Elegant, warm and comfortable — so you feel at home."
+    "subtitle": "Elegant, warm and comfortable — so you feel at home.",
+    "showAll": "See all photos ({count})",
+    "showLess": "Show fewer photos"
   },
   "Amenities": {
     "title": "Amenities",
@@ -142,7 +144,6 @@
     "notesPlaceholder": "Arrival time, special needs, questions…",
     "requestTitle": "Send a booking request",
     "requestHint": "Free of charge — the host will confirm availability and price.",
-    "whatsapp": "Request via WhatsApp",
     "viber": "Request via Viber",
     "viberCopied": "Message copied — paste it into the Viber chat.",
     "call": "Call {phone}",
@@ -161,7 +162,9 @@
     "title": "Guest rating",
     "outOf": "/ {outOf}",
     "source": "Rating on {source}",
-    "readAll": "Read the reviews on {source}"
+    "readAll": "Read the reviews on {source}",
+    "basedOn": "based on {count} reviews",
+    "subtitle": "Read all guest reviews on the platforms."
   },
   "Faq": {
     "title": "Frequently asked questions",
@@ -174,8 +177,8 @@
   },
   "Contact": {
     "call": "Call",
-    "whatsapp": "WhatsApp",
-    "book": "Book"
+    "book": "Book",
+    "viber": "Viber"
   },
   "Footer": {
     "contact": "Contact",
@@ -183,10 +186,18 @@
     "license": "Registry no. (AMA): {number}",
     "rights": "© {year} {name}. All rights reserved.",
     "privacy": "Privacy policy",
-    "terms": "Booking terms"
+    "terms": "Booking terms",
+    "credit": "Website designed and built by {name}"
   },
   "NotFound": {
     "title": "Page not found",
+    "back": "Back to home"
+  },
+  "HouseRules": {
+    "title": "House rules",
+    "subtitle": "For a pleasant stay for everyone."
+  },
+  "Legal": {
     "back": "Back to home"
   }
 }

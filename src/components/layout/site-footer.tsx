@@ -2,10 +2,10 @@ import { ExternalLinkIcon, MapPinIcon, PhoneIcon } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import type { Locale } from "@/i18n/routing"
-import { fullAddress, property, tr } from "@/content/property"
+import { fullAddress, property, siteCredit, tr } from "@/content/property"
 import { contactLinks } from "@/lib/contact"
 import { mapsLinks } from "@/components/location/place-meta"
-import { WhatsAppIcon } from "@/components/booking/booking-widget"
+import { ViberIcon } from "@/components/booking/booking-widget"
 
 export function SiteFooter() {
   const t = useTranslations("Footer")
@@ -35,12 +35,10 @@ export function SiteFooter() {
             <PhoneIcon className="size-4" /> {property.contact.phoneDisplay}
           </a>
           <a
-            href={contactLinks.whatsapp()}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={contactLinks.viber}
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
           >
-            <WhatsAppIcon className="size-4" /> WhatsApp / Viber
+            <ViberIcon className="size-4" /> Viber
           </a>
           <a
             href={mapsLinks.place(address)}
@@ -70,12 +68,15 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-border">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            {t("rights", {
-              year: new Date().getFullYear(),
-              name: property.name,
-            })}
-          </p>
+          <div className="space-y-1">
+            <p>
+              {t("rights", {
+                year: new Date().getFullYear(),
+                name: property.name,
+              })}
+            </p>
+            <p>{t("credit", { name: tr(siteCredit.name, locale) })}</p>
+          </div>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-foreground">
               {t("privacy")}

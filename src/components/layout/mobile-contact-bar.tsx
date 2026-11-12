@@ -3,10 +3,10 @@
 import { CalendarDaysIcon, PhoneIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { contactLinks } from "@/lib/contact"
-import { WhatsAppIcon } from "@/components/booking/booking-widget"
+import { ViberIcon } from "@/components/booking/booking-widget"
 import { ScrollLink } from "./scroll-link"
 
-/** Σταθερή μπάρα στο κάτω μέρος σε κινητά/tablet: άμεση κλήση, WhatsApp, κράτηση */
+/** Σταθερή μπάρα στο κάτω μέρος σε κινητά/tablet: άμεση κλήση, Viber, κράτηση */
 export function MobileContactBar() {
   const t = useTranslations("Contact")
   const item =
@@ -22,13 +22,11 @@ export function MobileContactBar() {
         {t("call")}
       </a>
       <a
-        href={contactLinks.whatsapp()}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={contactLinks.viber}
         className={item}
       >
-        <WhatsAppIcon className="size-5 text-[#1fa855]" />
-        {t("whatsapp")}
+        <ViberIcon className="size-5 text-[#7360f2]" />
+        {t("viber")}
       </a>
       <ScrollLink
         href="/#booking"
