@@ -192,8 +192,8 @@ export const termsOfBooking: LegalDoc = {
       title: L("Διαθεσιμότητα και τιμές", "Availability and prices"),
       blocks: [
         p(
-          "Το ημερολόγιο ενημερώνεται περιοδικά από τις πλατφόρμες και είναι ενδεικτικό· η διαθεσιμότητα και η τελική τιμή επιβεβαιώνονται από τον οικοδεσπότη. Ο υπολογισμός κόστους στη σελίδα είναι ενδεικτικός. Η τελική τιμή μπορεί να περιλαμβάνει το νόμιμο τέλος ανθεκτικότητας στην κλιματική κρίση.",
-          "The calendar is updated periodically from the platforms and is indicative; availability and the final price are confirmed by the host. The cost calculation on this website is an estimate. The final price may include the statutory climate crisis resilience fee.",
+          "Το ημερολόγιο ενημερώνεται περιοδικά από τις πλατφόρμες και είναι ενδεικτικό· η διαθεσιμότητα και η τελική τιμή επιβεβαιώνονται από τον οικοδεσπότη. Η τελική τιμή μπορεί να περιλαμβάνει το νόμιμο τέλος ανθεκτικότητας στην κλιματική κρίση.",
+          "The calendar is updated periodically from the platforms and is indicative; availability and the final price are confirmed by the host. The final price may include the statutory climate crisis resilience fee.",
         ),
       ],
     },

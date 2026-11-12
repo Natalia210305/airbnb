@@ -93,7 +93,15 @@ export function BookingWidget() {
     else setRange({ from: range!.from, to: day })
   }
 
-  const q = checkIn && checkOut ? quote(checkIn, checkOut, pricing) : null
+  const nights = checkIn && checkOut ? nightsBetween(checkIn, checkOut) : 0
+  // Κόστος εμφανίζεται ΜΟΝΟ όταν έχουν οριστεί πραγματικές τιμές (pricing.rates)
+  const q =
+    checkIn && checkOut && pricing.rates
+      ? quote(checkIn, checkOut, {
+          ...pricing.rates,
+          minNights: pricing.minNights,
+        })
+      : null
   const fmt = (n: number) => formatPrice(n, locale, Number.isInteger(n) ? 0 : 2)
   const dateFmt = new Intl.DateTimeFormat(locale === "el" ? "el-GR" : "en-GB", {
     weekday: "short",
@@ -104,19 +112,19 @@ export function BookingWidget() {
 
   const message = (() => {
     const lines = [
-      t(q ? "msgGreeting" : "msgInquiry", { name: property.name }),
+      t(nights > 0 ? "msgGreeting" : "msgInquiry", { name: property.name }),
       "",
     ]
-    if (q && checkIn && checkOut) {
+    if (nights > 0 && checkIn && checkOut) {
       lines.push(
         `📅 ${t("msgCheckIn", { date: dateFmt.format(fromISODate(checkIn)) })}`,
         `📅 ${t("msgCheckOut", {
           date: dateFmt.format(fromISODate(checkOut)),
-          nights: t("nights", { count: q.nights }),
+          nights: t("nights", { count: nights }),
         })}`,
         `👥 ${t("msgGuests", { count: guests })}`,
-        `💶 ${t("msgTotal", { total: fmt(q.total) })}`,
       )
+      if (q) lines.push(`💶 ${t("msgTotal", { total: fmt(q.total) })}`)
     }
     if (name.trim()) lines.push(`🙋 ${t("msgName", { name: name.trim() })}`)
     if (purpose) lines.push(`ℹ️ ${t("msgPurpose", { purpose: t(purpose) })}`)
@@ -276,7 +284,7 @@ export function BookingWidget() {
               {q.discount > 0 && (
                 <Row
                   label={t("weeklyDiscount", {
-                    pct: pricing.weeklyDiscountPct,
+                    pct: pricing.rates?.weeklyDiscountPct ?? 0,
                   })}
                   value={`−${fmt(q.discount)}`}
                   className="text-accent-foreground"
@@ -300,15 +308,18 @@ export function BookingWidget() {
                 </dd>
               </div>
             </dl>
+          ) : nights > 0 ? (
+            <p className="text-sm">
+              <span className="font-medium">
+                {t("nights", { count: nights })}
+              </span>
+              <span className="text-muted-foreground">
+                {" "}
+                · {t("priceOnRequest")}
+              </span>
+            </p>
           ) : (
-            <p className="text-sm text-muted-foreground">
-              {t("selectDatesForPrice")}
-            </p>
-          )}
-          {pricing.isPlaceholder && (
-            <p className="mt-3 rounded-lg bg-secondary px-3 py-2 text-xs text-secondary-foreground">
-              {t("placeholderPrices")}
-            </p>
+            <p className="text-sm text-muted-foreground">{t("selectDates")}</p>
           )}
         </div>
 

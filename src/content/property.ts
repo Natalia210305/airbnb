@@ -123,34 +123,36 @@ export type Season = {
   label: Localized
 }
 
-export const pricing = {
-  /**
-   * TODO: ΕΝΔΕΙΚΤΙΚΕΣ τιμές — αντικαταστήστε με τις πραγματικές και βάλτε
-   * `isPlaceholder: false` (μέχρι τότε εμφανίζεται σημείωση στον υπολογιστή).
-   */
-  isPlaceholder: true,
-  currency: "EUR",
-  basePerNight: 60,
+/** Τιμές διαμονής — συμπληρώνονται όταν μάθουμε τις πραγματικές (βλ. `pricing.rates`) */
+export type PricingRates = {
+  basePerNight: number
   /** Εποχικές τιμές (υπερισχύουν της βασικής). Η πρώτη που ταιριάζει κερδίζει. */
-  seasons: [
-    {
-      from: "12-20",
-      to: "01-06",
-      perNight: 70,
-      label: { el: "Γιορτές", en: "Holidays" },
-    },
-  ] as Season[],
-  cleaningFee: 0,
-  minNights: 1,
+  seasons: Season[]
+  cleaningFee: number
   /** Έκπτωση % για διαμονές ≥ 7 νυχτών (0 = καμία) */
-  weeklyDiscountPct: 10,
-  /** Μέγιστοι επισκέπτες στη φόρμα — TODO: ίδιο με τη χωρητικότητα */
+  weeklyDiscountPct: number
+  /** Τέλος ανθεκτικότητας στην κλιματική κρίση ανά διανυκτέρευση — επιβεβαιώστε τα ποσά με τον λογιστή */
+  climateFee: { aprToOct: number; novToMar: number }
+}
+
+export const pricing = {
+  currency: "EUR",
+  minNights: 1,
+  /** Μέγιστοι επισκέπτες στη φόρμα (4 σύμφωνα με το Airbnb) */
   maxGuests: 4,
   /**
-   * Τέλος ανθεκτικότητας στην κλιματική κρίση (ανά διανυκτέρευση, ακίνητα
-   * βραχυχρόνιας μίσθωσης). Επιβεβαιώστε τα ισχύοντα ποσά με τον λογιστή σας.
+   * ΤΙΜΕΣ: δεν έχουν οριστεί ακόμα. Όσο είναι `null`, ΔΕΝ εμφανίζεται καμία τιμή ή κόστος στη
+   * σελίδα (ούτε στο μήνυμα προς Viber). Όταν μάθουμε τις πραγματικές τιμές, συμπληρώστε π.χ.:
+   *   rates: {
+   *     basePerNight: 0,
+   *     seasons: [{ from: "12-20", to: "01-06", perNight: 0, label: { el: "Γιορτές", en: "Holidays" } }],
+   *     cleaningFee: 0,
+   *     weeklyDiscountPct: 0,
+   *     climateFee: { aprToOct: 0, novToMar: 0 },
+   *   }
+   * και ο υπολογιστής κόστους εμφανίζεται αυτόματα.
    */
-  climateFee: { aprToOct: 8, novToMar: 2 },
+  rates: null as PricingRates | null,
 }
 
 /* ── Περιεχόμενο ενοτήτων ──────────────────────────────────────────────── */
@@ -205,7 +207,10 @@ export const gallery: Photo[] = [
     src: "/photo14.jpg",
     width: 430,
     height: 768,
-    alt: { el: "Γωνιά καθιστικού με καναπέ", en: "Sofa corner in the living area" },
+    alt: {
+      el: "Γωνιά καθιστικού με καναπέ",
+      en: "Sofa corner in the living area",
+    },
   },
   {
     src: "/photo7.jpg",
@@ -226,7 +231,10 @@ export const gallery: Photo[] = [
     src: "/photo1.jpg",
     width: 576,
     height: 768,
-    alt: { el: "Υπνοδωμάτιο με διπλό κρεβάτι", en: "Bedroom with a double bed" },
+    alt: {
+      el: "Υπνοδωμάτιο με διπλό κρεβάτι",
+      en: "Bedroom with a double bed",
+    },
   },
   {
     src: "/photo2.jpg",
@@ -241,7 +249,10 @@ export const gallery: Photo[] = [
     src: "/photo8.jpg",
     width: 576,
     height: 768,
-    alt: { el: "Ντουλάπια κουζίνας με σκεύη", en: "Kitchen cupboards with tableware" },
+    alt: {
+      el: "Ντουλάπια κουζίνας με σκεύη",
+      en: "Kitchen cupboards with tableware",
+    },
   },
   {
     src: "/photo6.jpg",
@@ -352,19 +363,31 @@ export const amenityGroups: AmenityGroup[] = [
     id: "views",
     title: { el: "Θέα", en: "Scenic views" },
     items: [
-      { icon: "courtyard", label: { el: "Θέα στην αυλή", en: "Courtyard view" } },
+      {
+        icon: "courtyard",
+        label: { el: "Θέα στην αυλή", en: "Courtyard view" },
+      },
       { icon: "garden", label: { el: "Θέα στον κήπο", en: "Garden view" } },
       { icon: "mountain", label: { el: "Θέα στο βουνό", en: "Mountain view" } },
-      { icon: "city", label: { el: "Θέα στον ορίζοντα της πόλης", en: "City skyline view" } },
+      {
+        icon: "city",
+        label: { el: "Θέα στον ορίζοντα της πόλης", en: "City skyline view" },
+      },
     ],
   },
   {
     id: "bathroom",
     title: { el: "Μπάνιο", en: "Bathroom" },
     items: [
-      { icon: "bath", label: { el: "Ιδιωτικό μπάνιο", en: "Private bathroom" } },
+      {
+        icon: "bath",
+        label: { el: "Ιδιωτικό μπάνιο", en: "Private bathroom" },
+      },
       { icon: "shower", label: { el: "Ντους", en: "Shower" } },
-      { icon: "hairdryer", label: { el: "Πιστολάκι μαλλιών", en: "Hair dryer" } },
+      {
+        icon: "hairdryer",
+        label: { el: "Πιστολάκι μαλλιών", en: "Hair dryer" },
+      },
       { icon: "soap", label: { el: "Σαμπουάν", en: "Shampoo" } },
       { icon: "soap", label: { el: "Σαπούνι σώματος", en: "Body soap" } },
       { icon: "shower", label: { el: "Αφρόλουτρο", en: "Shower gel" } },
@@ -375,18 +398,66 @@ export const amenityGroups: AmenityGroup[] = [
     id: "bedroom",
     title: { el: "Υπνοδωμάτιο και πλυντήριο", en: "Bedroom and laundry" },
     items: [
-      { icon: "washer", label: { el: "Πλυντήριο ρούχων δωρεάν – εντός του χώρου", en: "Free washing machine – in unit" } },
-      { icon: "dryer", label: { el: "Στεγνωτήριο δωρεάν – εντός του χώρου", en: "Free dryer – in unit" } },
-      { icon: "wardrobe", label: { el: "Ντουλάπα για τα ρούχα", en: "Clothing storage: wardrobe" } },
+      {
+        icon: "washer",
+        label: {
+          el: "Πλυντήριο ρούχων δωρεάν – εντός του χώρου",
+          en: "Free washing machine – in unit",
+        },
+      },
+      {
+        icon: "dryer",
+        label: {
+          el: "Στεγνωτήριο δωρεάν – εντός του χώρου",
+          en: "Free dryer – in unit",
+        },
+      },
+      {
+        icon: "wardrobe",
+        label: {
+          el: "Ντουλάπα για τα ρούχα",
+          en: "Clothing storage: wardrobe",
+        },
+      },
       { icon: "hangers", label: { el: "Κρεμάστρες", en: "Hangers" } },
       { icon: "bedlinen", label: { el: "Κλινοσκεπάσματα", en: "Bed linen" } },
-      { icon: "bedlinen", label: { el: "Βαμβακερά λευκά είδη", en: "Cotton linen" } },
-      { icon: "pillows", label: { el: "Επιπλέον μαξιλάρια και κουβέρτες", en: "Extra pillows and blankets" } },
-      { icon: "blinds", label: { el: "Συσκοτιστικές περσίδες (black-out)", en: "Black-out blinds" } },
-      { icon: "socket", label: { el: "Πρίζα κοντά στο κρεβάτι", en: "Power socket near the bed" } },
+      {
+        icon: "bedlinen",
+        label: { el: "Βαμβακερά λευκά είδη", en: "Cotton linen" },
+      },
+      {
+        icon: "pillows",
+        label: {
+          el: "Επιπλέον μαξιλάρια και κουβέρτες",
+          en: "Extra pillows and blankets",
+        },
+      },
+      {
+        icon: "blinds",
+        label: {
+          el: "Συσκοτιστικές περσίδες (black-out)",
+          en: "Black-out blinds",
+        },
+      },
+      {
+        icon: "socket",
+        label: {
+          el: "Πρίζα κοντά στο κρεβάτι",
+          en: "Power socket near the bed",
+        },
+      },
       { icon: "iron", label: { el: "Σίδερο", en: "Iron" } },
-      { icon: "rack", label: { el: "Απλώστρα ρούχων", en: "Drying rack for clothing" } },
-      { icon: "crib", label: { el: "Βρεφική κούνια – δωρεάν, για παιδιά 0–2 ετών", en: "Baby cot – free, for children aged 0–2" } },
+      {
+        icon: "rack",
+        label: { el: "Απλώστρα ρούχων", en: "Drying rack for clothing" },
+      },
+      {
+        icon: "crib",
+        label: {
+          el: "Βρεφική κούνια – δωρεάν, για παιδιά 0–2 ετών",
+          en: "Baby cot – free, for children aged 0–2",
+        },
+      },
     ],
   },
   {
@@ -401,17 +472,38 @@ export const amenityGroups: AmenityGroup[] = [
     id: "entertainment",
     title: { el: "Ψυχαγωγία και internet", en: "Entertainment and internet" },
     items: [
-      { icon: "tv", label: { el: "Τηλεόραση επίπεδης οθόνης", en: "Flat-screen TV" } },
+      {
+        icon: "tv",
+        label: { el: "Τηλεόραση επίπεδης οθόνης", en: "Flat-screen TV" },
+      },
       { icon: "tv", label: { el: "Καλωδιακά κανάλια", en: "Cable channels" } },
-      { icon: "wifi", label: { el: "Δωρεάν Wi-Fi σε όλους τους χώρους", en: "Free Wi-Fi throughout" } },
+      {
+        icon: "wifi",
+        label: {
+          el: "Δωρεάν Wi-Fi σε όλους τους χώρους",
+          en: "Free Wi-Fi throughout",
+        },
+      },
     ],
   },
   {
     id: "climate",
     title: { el: "Θέρμανση και δροσισμός", en: "Heating and cooling" },
     items: [
-      { icon: "ac", label: { el: "Κλιματισμός (split)", en: "AC – split-type ductless system" } },
-      { icon: "heating", label: { el: "Θέρμανση (split)", en: "Heating – split-type ductless system" } },
+      {
+        icon: "ac",
+        label: {
+          el: "Κλιματισμός (split)",
+          en: "AC – split-type ductless system",
+        },
+      },
+      {
+        icon: "heating",
+        label: {
+          el: "Θέρμανση (split)",
+          en: "Heating – split-type ductless system",
+        },
+      },
     ],
   },
   {
@@ -419,8 +511,14 @@ export const amenityGroups: AmenityGroup[] = [
     title: { el: "Ασφάλεια", en: "Home safety" },
     items: [
       { icon: "smoke", label: { el: "Ανιχνευτής καπνού", en: "Smoke alarm" } },
-      { icon: "extinguisher", label: { el: "Πυροσβεστήρας", en: "Fire extinguisher" } },
-      { icon: "firstaid", label: { el: "Κουτί πρώτων βοηθειών", en: "First aid kit" } },
+      {
+        icon: "extinguisher",
+        label: { el: "Πυροσβεστήρας", en: "Fire extinguisher" },
+      },
+      {
+        icon: "firstaid",
+        label: { el: "Κουτί πρώτων βοηθειών", en: "First aid kit" },
+      },
     ],
   },
   {
@@ -428,14 +526,44 @@ export const amenityGroups: AmenityGroup[] = [
     title: { el: "Κουζίνα και τραπεζαρία", en: "Kitchen and dining" },
     items: [
       { icon: "fridge", label: { el: "Ψυγείο", en: "Refrigerator" } },
-      { icon: "stove", label: { el: "Επαγωγική εστία", en: "Induction stove" } },
-      { icon: "coffee", label: { el: "Καφετιέρα espresso", en: "Coffee maker: espresso machine" } },
+      {
+        icon: "stove",
+        label: { el: "Επαγωγική εστία", en: "Induction stove" },
+      },
+      {
+        icon: "coffee",
+        label: {
+          el: "Καφετιέρα espresso",
+          en: "Coffee maker: espresso machine",
+        },
+      },
       { icon: "coffee", label: { el: "Καφές", en: "Coffee" } },
-      { icon: "kettle", label: { el: "Ηλεκτρικός βραστήρας", en: "Electric kettle" } },
-      { icon: "cooking", label: { el: "Βασικά μαγειρικής: κατσαρόλες και τηγάνια, λάδι, αλάτι και πιπέρι", en: "Cooking basics: pots and pans, oil, salt and pepper" } },
-      { icon: "dishes", label: { el: "Πιάτα, μπολ, φλιτζάνια, μαχαιροπήρουνα και άλλα σκεύη", en: "Plates, bowls, cups, cutlery and other utensils" } },
+      {
+        icon: "kettle",
+        label: { el: "Ηλεκτρικός βραστήρας", en: "Electric kettle" },
+      },
+      {
+        icon: "cooking",
+        label: {
+          el: "Βασικά μαγειρικής: κατσαρόλες και τηγάνια, λάδι, αλάτι και πιπέρι",
+          en: "Cooking basics: pots and pans, oil, salt and pepper",
+        },
+      },
+      {
+        icon: "dishes",
+        label: {
+          el: "Πιάτα, μπολ, φλιτζάνια, μαχαιροπήρουνα και άλλα σκεύη",
+          en: "Plates, bowls, cups, cutlery and other utensils",
+        },
+      },
       { icon: "wine", label: { el: "Ποτήρια κρασιού", en: "Wine glasses" } },
-      { icon: "kitchenette", label: { el: "Μικρή κουζίνα (kitchenette) – χώρος για να ζεστάνετε και να φυλάξετε φαγητό στο ψυγείο", en: "Kitchenette – space where guests can heat up and refrigerate food" } },
+      {
+        icon: "kitchenette",
+        label: {
+          el: "Μικρή κουζίνα (kitchenette) – χώρος για να ζεστάνετε και να φυλάξετε φαγητό στο ψυγείο",
+          en: "Kitchenette – space where guests can heat up and refrigerate food",
+        },
+      },
       { icon: "dining", label: { el: "Τραπεζαρία", en: "Dining table" } },
     ],
   },
@@ -443,23 +571,53 @@ export const amenityGroups: AmenityGroup[] = [
     id: "property",
     title: { el: "Το κατάλυμα", en: "The property" },
     items: [
-      { icon: "entrance", label: { el: "Ιδιωτική είσοδος – ξεχωριστή είσοδος από τον δρόμο ή το κτίριο", en: "Private entrance – separate street or building entrance" } },
-      { icon: "building", label: { el: "Αυτόνομο κτίριο", en: "Standalone building" } },
+      {
+        icon: "entrance",
+        label: {
+          el: "Ιδιωτική είσοδος – ξεχωριστή είσοδος από τον δρόμο ή το κτίριο",
+          en: "Private entrance – separate street or building entrance",
+        },
+      },
+      {
+        icon: "building",
+        label: { el: "Αυτόνομο κτίριο", en: "Standalone building" },
+      },
       { icon: "soundproof", label: { el: "Ηχομόνωση", en: "Soundproofing" } },
-      { icon: "floor", label: { el: "Δάπεδο από πλακάκι/μάρμαρο", en: "Tile/marble floor" } },
-      { icon: "nosmoking", label: { el: "Δωμάτια για μη καπνίζοντες", en: "Non-smoking rooms" } },
+      {
+        icon: "floor",
+        label: { el: "Δάπεδο από πλακάκι/μάρμαρο", en: "Tile/marble floor" },
+      },
+      {
+        icon: "nosmoking",
+        label: { el: "Δωμάτια για μη καπνίζοντες", en: "Non-smoking rooms" },
+      },
     ],
   },
   {
     id: "outdoor",
     title: { el: "Εξωτερικός χώρος", en: "Outdoor" },
     items: [
-      { icon: "courtyard", label: { el: "Κοινόχρηστη αυλή – πλήρως περιφραγμένη", en: "Shared courtyard – fully fenced" } },
+      {
+        icon: "courtyard",
+        label: {
+          el: "Κοινόχρηστη αυλή – πλήρως περιφραγμένη",
+          en: "Shared courtyard – fully fenced",
+        },
+      },
       { icon: "courtyard", label: { el: "Αίθριο", en: "Patio" } },
       { icon: "terrace", label: { el: "Βεράντα", en: "Terrace" } },
       { icon: "garden", label: { el: "Κήπος", en: "Garden" } },
-      { icon: "outdoorfurniture", label: { el: "Έπιπλα εξωτερικού χώρου", en: "Outdoor furniture" } },
-      { icon: "outdoordining", label: { el: "Χώρος φαγητού σε εξωτερικό χώρο", en: "Outdoor dining area" } },
+      {
+        icon: "outdoorfurniture",
+        label: { el: "Έπιπλα εξωτερικού χώρου", en: "Outdoor furniture" },
+      },
+      {
+        icon: "outdoordining",
+        label: {
+          el: "Χώρος φαγητού σε εξωτερικό χώρο",
+          en: "Outdoor dining area",
+        },
+      },
       { icon: "bbq", label: { el: "Ψησταριά (BBQ)", en: "BBQ" } },
     ],
   },
@@ -467,28 +625,43 @@ export const amenityGroups: AmenityGroup[] = [
     id: "parking",
     title: { el: "Πάρκινγκ", en: "Parking and facilities" },
     items: [
-      { icon: "parking", label: { el: "Ιδιωτικό πάρκινγκ δωρεάν στον χώρο του καταλύματος – δεν απαιτείται κράτηση", en: "Free private parking on site – no reservation needed" } },
+      {
+        icon: "parking",
+        label: {
+          el: "Ιδιωτικό πάρκινγκ δωρεάν στον χώρο του καταλύματος – δεν απαιτείται κράτηση",
+          en: "Free private parking on site – no reservation needed",
+        },
+      },
     ],
   },
   {
     id: "services",
     title: { el: "Υπηρεσίες", en: "Services" },
     items: [
-      { icon: "longstay", label: { el: "Επιτρέπονται μακροχρόνιες διαμονές (28 ημέρες ή περισσότερο)", en: "Long-term stays allowed (28 days or more)" } },
-      { icon: "host", label: { el: "Ο οικοδεσπότης σας υποδέχεται", en: "Host greets you" } },
-      { icon: "languages", label: { el: "Επικοινωνία στα ελληνικά και στα αγγλικά", en: "Greek and English spoken" } },
+      {
+        icon: "longstay",
+        label: {
+          el: "Επιτρέπονται μακροχρόνιες διαμονές (28 ημέρες ή περισσότερο)",
+          en: "Long-term stays allowed (28 days or more)",
+        },
+      },
+      {
+        icon: "host",
+        label: { el: "Ο οικοδεσπότης σας υποδέχεται", en: "Host greets you" },
+      },
+      {
+        icon: "languages",
+        label: {
+          el: "Επικοινωνία στα ελληνικά και στα αγγλικά",
+          en: "Greek and English spoken",
+        },
+      },
     ],
   },
 ]
 
 export type HouseRuleIcon =
-  | "checkin"
-  | "quiet"
-  | "smoking"
-  | "parties"
-  | "pets"
-  | "children"
-  | "crib"
+  "checkin" | "quiet" | "smoking" | "parties" | "pets" | "children" | "crib"
 
 /** Κανόνες καταλύματος, όπως αναγράφονται στο Booking.com */
 export const houseRules: {

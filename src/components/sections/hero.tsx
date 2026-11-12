@@ -126,10 +126,10 @@ export function Hero() {
               {t("call", { phone: property.contact.phoneDisplay })}
             </a>
           </div>
-          {!pricing.isPlaceholder && (
+          {pricing.rates && (
             <p className="-mt-2 text-sm text-muted-foreground">
               {t("fromPrice", {
-                price: formatPrice(pricing.basePerNight, locale),
+                price: formatPrice(pricing.rates.basePerNight, locale),
               })}
             </p>
           )}

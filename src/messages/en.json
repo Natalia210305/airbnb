@@ -108,7 +108,7 @@
   },
   "Booking": {
     "title": "Availability & prices",
-    "subtitle": "Pick your arrival and departure dates to see the cost of your stay instantly.",
+    "subtitle": "Pick your arrival and departure dates to check availability and send a booking request.",
     "pickCheckIn": "Select your arrival date",
     "pickCheckOut": "Select your departure date",
     "minNights": "Minimum stay: {count, plural, one {# night} other {# nights}}",
@@ -130,8 +130,6 @@
     "climateFee": "Climate crisis resilience fee",
     "total": "Total",
     "nights": "{count, plural, one {# night} other {# nights}}",
-    "selectDatesForPrice": "Select dates to calculate the cost.",
-    "placeholderPrices": "Indicative prices — the final price is confirmed by the host.",
     "name": "Full name",
     "namePlaceholder": "e.g. Maria Smith",
     "purpose": "Purpose of stay (optional)",
@@ -156,7 +154,9 @@
     "msgName": "Name: {name}",
     "msgPurpose": "Purpose of stay: {purpose}",
     "msgNotes": "Message: {notes}",
-    "orBookOn": "Or book through a platform"
+    "orBookOn": "Or book through a platform",
+    "selectDates": "Select your arrival and departure dates.",
+    "priceOnRequest": "The price is confirmed by the host."
   },
   "Reviews": {
     "title": "Guest rating",
