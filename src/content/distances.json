@@ -1,0 +1,141 @@
+{
+  "$comment": "ΠΑΡΑΓΕΤΑΙ ΑΥΤΟΜΑΤΑ από το scripts/compute-distances.mjs — μην το επεξεργάζεστε με το χέρι",
+  "generatedAt": "2026-11-12",
+  "property": {
+    "lat": 39.6801202,
+    "lng": 20.829546
+  },
+  "places": [
+    {
+      "id": "hospital",
+      "kind": "hospital",
+      "name": {
+        "el": "Γενικό Νοσοκομείο Ιωαννίνων «Γ. Χατζηκώστα»",
+        "en": "G. Hatzikosta General Hospital of Ioannina"
+      },
+      "lat": 39.68185,
+      "lng": 20.82588,
+      "walkMeters": 461,
+      "walkMin": 7,
+      "driveMeters": 461,
+      "driveMin": 3
+    },
+    {
+      "id": "pharmacy",
+      "kind": "pharmacy",
+      "name": {
+        "el": "Φαρμακείο (δίπλα στο κατάλυμα)",
+        "en": "Pharmacy (next door)"
+      },
+      "lat": 39.68012,
+      "lng": 20.82967,
+      "$comment": "ΠΡΟΣΕΓΓΙΣΤΙΚΗ θέση ~10 μ. από το κατάλυμα — ο ιδιοκτήτης αναφέρει ότι είναι δίπλα. Αντικαταστήστε με ακριβείς συντεταγμένες από το Google Maps.",
+      "walkMeters": 10,
+      "walkMin": 1,
+      "driveMeters": 10,
+      "driveMin": 2
+    },
+    {
+      "id": "bus",
+      "kind": "bus",
+      "name": {
+        "el": "Στάση αστικού λεωφορείου — γραμμή 10 (ακριβώς έξω)",
+        "en": "City bus stop — line 10 (right outside)"
+      },
+      "lat": 39.68002,
+      "lng": 20.8295,
+      "$comment": "ΠΡΟΣΕΓΓΙΣΤΙΚΗ θέση ~13 μ. από το κατάλυμα — ο ιδιοκτήτης αναφέρει ότι είναι ακριβώς έξω. Αντικαταστήστε με ακριβείς συντεταγμένες από το Google Maps.",
+      "walkMeters": 0,
+      "walkMin": 1,
+      "driveMeters": 0,
+      "driveMin": 1
+    },
+    {
+      "id": "center",
+      "kind": "center",
+      "name": {
+        "el": "Κέντρο Ιωαννίνων (Πλατεία Πύρρου)",
+        "en": "Ioannina city centre (Pyrrou Square)"
+      },
+      "lat": 39.6639,
+      "lng": 20.85277,
+      "walkMeters": 3037,
+      "walkMin": 41,
+      "driveMeters": 3132,
+      "driveMin": 7
+    },
+    {
+      "id": "lake",
+      "kind": "lake",
+      "name": {
+        "el": "Λίμνη Παμβώτιδα (Μόλος – Πλατεία Μαβίλη)",
+        "en": "Lake Pamvotis (lakefront – Mavili Square)"
+      },
+      "lat": 39.67247,
+      "lng": 20.85619,
+      "walkMeters": 3241,
+      "walkMin": 44,
+      "driveMeters": 2993,
+      "driveMin": 6
+    },
+    {
+      "id": "castle",
+      "kind": "castle",
+      "name": {
+        "el": "Κάστρο Ιωαννίνων",
+        "en": "Ioannina Castle"
+      },
+      "lat": 39.67128,
+      "lng": 20.86023,
+      "walkMeters": 3414,
+      "walkMin": 46,
+      "driveMeters": 3467,
+      "driveMin": 7
+    },
+    {
+      "id": "supermarket",
+      "kind": "supermarket",
+      "name": {
+        "el": "Σούπερ μάρκετ",
+        "en": "Supermarket"
+      },
+      "detail": "Σκλαβενίτης",
+      "lat": 39.6809499,
+      "lng": 20.833015,
+      "walkMeters": 348,
+      "walkMin": 5,
+      "driveMeters": 348,
+      "driveMin": 2
+    }
+  ],
+  "hospitalRoute": [
+    [
+      39.68033,
+      20.82962
+    ],
+    [
+      39.68097,
+      20.82577
+    ],
+    [
+      39.68113,
+      20.82552
+    ],
+    [
+      39.68136,
+      20.82552
+    ],
+    [
+      39.68145,
+      20.82546
+    ],
+    [
+      39.68159,
+      20.82556
+    ],
+    [
+      39.68183,
+      20.8259
+    ]
+  ]
+}

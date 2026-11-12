@@ -1,0 +1,84 @@
+{
+  "$comment": "Δεδομένα για τον χάρτη και τις αποστάσεις. Μετά από αλλαγή συντεταγμένων τρέξτε: npm run distances",
+  "property": {
+    "lat": 39.6801202,
+    "lng": 20.829546,
+    "approximate": false,
+    "$source": "Google Maps — Λεωφ. Στρ. Μακρυγιάννη 23, Ιωάννινα 454 45 (πινέζα που έδωσε ο ιδιοκτήτης)"
+  },
+  "landmarks": [
+    {
+      "id": "hospital",
+      "kind": "hospital",
+      "name": {
+        "el": "Γενικό Νοσοκομείο Ιωαννίνων «Γ. Χατζηκώστα»",
+        "en": "G. Hatzikosta General Hospital of Ioannina"
+      },
+      "lat": 39.68185,
+      "lng": 20.82588
+    },
+    {
+      "id": "pharmacy",
+      "kind": "pharmacy",
+      "name": {
+        "el": "Φαρμακείο (δίπλα στο κατάλυμα)",
+        "en": "Pharmacy (next door)"
+      },
+      "lat": 39.68012,
+      "lng": 20.82967,
+      "$comment": "ΠΡΟΣΕΓΓΙΣΤΙΚΗ θέση ~10 μ. από το κατάλυμα — ο ιδιοκτήτης αναφέρει ότι είναι δίπλα. Αντικαταστήστε με ακριβείς συντεταγμένες από το Google Maps."
+    },
+    {
+      "id": "bus",
+      "kind": "bus",
+      "name": {
+        "el": "Στάση αστικού λεωφορείου — γραμμή 10 (ακριβώς έξω)",
+        "en": "City bus stop — line 10 (right outside)"
+      },
+      "lat": 39.68002,
+      "lng": 20.8295,
+      "$comment": "ΠΡΟΣΕΓΓΙΣΤΙΚΗ θέση ~13 μ. από το κατάλυμα — ο ιδιοκτήτης αναφέρει ότι είναι ακριβώς έξω. Αντικαταστήστε με ακριβείς συντεταγμένες από το Google Maps."
+    },
+    {
+      "id": "center",
+      "kind": "center",
+      "name": {
+        "el": "Κέντρο Ιωαννίνων (Πλατεία Πύρρου)",
+        "en": "Ioannina city centre (Pyrrou Square)"
+      },
+      "lat": 39.6639,
+      "lng": 20.85277
+    },
+    {
+      "id": "lake",
+      "kind": "lake",
+      "name": {
+        "el": "Λίμνη Παμβώτιδα (Μόλος – Πλατεία Μαβίλη)",
+        "en": "Lake Pamvotis (lakefront – Mavili Square)"
+      },
+      "lat": 39.67247,
+      "lng": 20.85619
+    },
+    {
+      "id": "castle",
+      "kind": "castle",
+      "name": {
+        "el": "Κάστρο Ιωαννίνων",
+        "en": "Ioannina Castle"
+      },
+      "lat": 39.67128,
+      "lng": 20.86023
+    }
+  ],
+  "nearbySearch": [
+    {
+      "id": "supermarket",
+      "kind": "supermarket",
+      "query": "supermarket",
+      "label": {
+        "el": "Σούπερ μάρκετ",
+        "en": "Supermarket"
+      }
+    }
+  ]
+}
